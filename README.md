@@ -2,7 +2,7 @@
 
 Capistrano-rails-server is collection of capistrano recipes for setting up production server for ROR. The current testing environment is Ubuntu 12.04LTS.
 ## Installation ##
-Add this lines to your application's Gemfile:
+Add these lines to your application's Gemfile:
 
     gem 'capistrano'
     gem 'capistrano-rails-server'
