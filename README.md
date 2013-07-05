@@ -15,7 +15,7 @@ And then execute:
 ## Using ##
 
 ### Prepare your app ###
-Run `$ cap init` in your app folder (details [here](http://guides.beanstalkapp.com/deployments/deploy-with-capistrano.html)).
+Run `$ cap init` in your app folder (details [here](http://www.capistranorb.com/documentation/getting-started/preparing-your-application/)).
 
 Than include recipes from this gem to your `deploy.conf`:
 
