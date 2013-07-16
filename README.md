@@ -162,6 +162,8 @@ You can overwrite any of these options in `deploy.conf` file.
 
 `unicorn_user`
 
+`unicorn_env` - production or development
+
 `unicorn_pid`
 
 `unicorn_config`
