@@ -4,8 +4,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = 'capistrano-rails-server'
-  s.version     = '1.1'
-  s.date        = '2013-07-04'
+  s.version     = '1.2.0'
+  s.date        = '2013-07-16'
   s.summary     = "Capistrano recipes to setup Rbenv, Nginx, Unicorn and Postgresql production environment."
   s.description = 
   "That gem includes capistrano recipes to install and configure ROR production development with Rbenv, Nginx, Unicorn and Postgresql."
