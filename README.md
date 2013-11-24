@@ -1,12 +1,10 @@
 #capistrano-rails-server gem#
 
-Capistrano-rails-server is collection of capistrano recipes for setting up production server for ROR. The current testing environment is Ubuntu 12.04LTS.
+Capistrano-rails-server is a collection of capistrano recipes for setting up production server for RoR. The current testing environment is Ubuntu 12.04 LTS.
 ## Installation ##
-Add these lines to your application's Gemfile:
+Add this line to your application's Gemfile:
 
-    gem 'capistrano'
     gem 'capistrano-rails-server'
-    gem 'unicorn'
     
 And then execute:
 
@@ -14,53 +12,27 @@ And then execute:
     
 ## Using ##
 
-### Prepare your app ###
-Run `$ cap init` in your app folder (details [here](http://www.capistranorb.com/documentation/getting-started/preparing-your-application/)).
+### Configure your app ###
+Run `$ cap init` in your app folder if you don't have deploy.rb in your config dir (details [here](http://www.capistranorb.com/documentation/getting-started/preparing-your-application/)).
 
-Than include recipes from this gem to your `deploy.conf`:
-
-example `deploy.conf` file:
+Then include these lines to the end of your `deploy.rb`:
 
 ```ruby
-require "bundler/capistrano"
-load "deploy/assets"
-
 # uncomment this if you need non en-US locale for postgresql server
 #set :postgresql_locale, "ru_RU"
 #set :postgresql_rebuild, true
 
 # uncomment this if you need another version of ruby or using another OS
-#set_default :ruby_version, "2.0.0-p247"
+#set_default :ruby_version, "2.0.0-p353"
 #set_default :rbenv_bootstrap, "bootstrap-ubuntu-12-04"
+# 
+# see other available params in documentation 
+# https://github.com/Drakula2k/capistrano-rails-server
 
-set :application, "yourappuser"
 
-server "yourapp.address", :app, :web, :db, :primary => true
-
-set :user, "yourapp"
-set :use_sudo, false
-set :deploy_to, "/home/#{user}/apps/#{application}"
-#set :deploy_via, :remote_cache
-set :repository, "yourrepo"
-set :branch, "master"
-
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
-
-after 'deploy:update_code', 'deploy:migrate'
-set :keep_releases, 5
-after 'deploy', 'deploy:cleanup'
-
-# you can comment out any recipe if you don't need it
-require "capistrano-rails-server/recipes/base"
-require "capistrano-rails-server/recipes/nginx"
-require "capistrano-rails-server/recipes/unicorn"
-require "capistrano-rails-server/recipes/postgresql"
-require "capistrano-rails-server/recipes/rbenv"
-require "capistrano-rails-server/recipes/check"
-# uncomment this if you need to generate deployment ssh key for private repository
-# public key will be printed at the end of deploy:install task
-#require "capistrano-rails-server/recipes/key"
+# you can remove any recipe if you don't need it
+set :capistrano_rails_server, [:base, :nginx, :unicorn, :postgresql, :postfix, :rbenv, :check, :key]
+require 'capistrano-rails-server'
 
 ```
 ### Prepare server (instructions for Ubuntu 12.04) ###
@@ -139,35 +111,41 @@ Thats all, now you can deploy your app:
 
 `key:remove`
 
-### Available options and defaults ###
-You can overwrite any of these options in `deploy.conf` file.
+### Available options and defaults for all recipes###
+You can overwrite any of these options in `deploy.rb` file.
 
-`ruby_version`
+#### :rbenv ####
 
-`rbenv_bootstrap`
+`ruby_version` ("2.0.0-p247")
 
-`postgresql_host`
+`rbenv_bootstrap` ("bootstrap-ubuntu-12-04")
 
-`postgresql_user`
+#### :postgresql ####
 
-`postgresql_password`
+`postgresql_host` ("localhost")
 
-`postgresql_database`
+`postgresql_user` (application)
 
-`postgresql_rebuild`
+`postgresql_password` (console password_prompt)
 
-`postgresql_encoding` - useful only if postgresql_rebuild is true
+`postgresql_database` ("#{application}_production")
 
-`postgresql_locale` - useful only if postgresql_rebuild is true
+`postgresql_rebuild` (false)
 
-`unicorn_user`
+`postgresql_encoding` ("UTF-8") - useful only if postgresql_rebuild is true
 
-`unicorn_env` - production or development
+`postgresql_locale` ("en_US") - useful only if postgresql_rebuild is true
 
-`unicorn_pid`
+#### :unicorn ####
 
-`unicorn_config`
+`unicorn_user` (user)
 
-`unicorn_log`
+`unicorn_env` ("production") - production or development
 
-`unicorn_workers`
+`unicorn_pid` ("#{current_path}/tmp/pids/unicorn.pid")
+
+`unicorn_config` ("#{shared_path}/config/unicorn.rb")
+
+`unicorn_log` ("#{shared_path}/log/unicorn.log")
+
+`unicorn_workers` (2)
