@@ -1,10 +1,4 @@
-require "capistrano-rails-server/recipes/common"
-
-configuration = Capistrano::Configuration.respond_to?(:instance) ?
-  Capistrano::Configuration.instance(:must_exist) :
-  Capistrano.configuration(:must_exist)
-
-configuration.load do
+@configuration.load do
   namespace :key do
     desc "Generate deployment key for repository"
     task :generate, roles: :web do

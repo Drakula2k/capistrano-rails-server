@@ -1,10 +1,4 @@
-require "capistrano-rails-server/recipes/common"
-
-configuration = Capistrano::Configuration.respond_to?(:instance) ?
-  Capistrano::Configuration.instance(:must_exist) :
-  Capistrano.configuration(:must_exist)
-
-configuration.load do
+@configuration.load do
   set_default(:unicorn_user) { user }
   set_default(:unicorn_pid) { "#{current_path}/tmp/pids/unicorn.pid" }
   set_default(:unicorn_config) { "#{shared_path}/config/unicorn.rb" }

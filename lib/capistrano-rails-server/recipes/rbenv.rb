@@ -1,10 +1,4 @@
-require "capistrano-rails-server/recipes/common"
-
-configuration = Capistrano::Configuration.respond_to?(:instance) ?
-  Capistrano::Configuration.instance(:must_exist) :
-  Capistrano.configuration(:must_exist)
-
-configuration.load do
+@configuration.load do
   set_default :ruby_version, "2.0.0-p247"
   set_default :rbenv_bootstrap, "bootstrap-ubuntu-12-04"
 
