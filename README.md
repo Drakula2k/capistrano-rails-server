@@ -111,6 +111,10 @@ Thats all, now you can deploy your app:
 
 `key:remove`
 
+`postfix:install`
+
+`postfix:stats` - show postfix stats
+
 ### Available options and defaults for all recipes###
 You can overwrite any of these options in `deploy.rb` file.
 
