@@ -4,7 +4,7 @@ Capistrano-rails-server is a collection of capistrano recipes for setting up pro
 ## Installation ##
 Add this line to your application's Gemfile:
 
-    gem 'capistrano-rails-server'
+    gem 'capistrano-rails-server', :require => false
     
 And then execute:
 
