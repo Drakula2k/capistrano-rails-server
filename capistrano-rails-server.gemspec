@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/Drakula2k/capistrano-rails-server"
   s.files       = `git ls-files`.split($/)
   s.require_paths = ["lib"]
-  s.add_dependency "capistrano", "~> 2.15.5"
-  s.add_dependency "rvm-capistrano", "~> 1.5.1"
+  s.add_dependency "capistrano", "~> 2.15"
+  s.add_dependency "rvm-capistrano", "~> 1.5"
   s.add_development_dependency "rake"
 end
