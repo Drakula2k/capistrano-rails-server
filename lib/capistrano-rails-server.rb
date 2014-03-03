@@ -6,7 +6,7 @@ require 'capistrano-rails-server/recipes/common'
 
 @configuration.load do
   unless exists?(:capistrano_rails_server)
-    set :capistrano_rails_server, [:base, :nginx, :unicorn, :rbenv, :check, :key]
+    set :capistrano_rails_server, [:base, :nginx, :unicorn, :rvm, :check, :key]
   end
 
   capistrano_rails_server.each do |recipe|
