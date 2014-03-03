@@ -22,16 +22,15 @@ Then include these lines to the end of your `deploy.rb`:
 #set :postgresql_locale, "ru_RU"
 #set :postgresql_rebuild, true
 
-# uncomment this if you need another version of ruby or using another OS
-#set_default :ruby_version, "2.0.0-p353"
-#set_default :rbenv_bootstrap, "bootstrap-ubuntu-12-04"
+# uncomment this if you need another version of Ruby
+#set_default :rvm_ruby_string, "2.0.0-p353"
 # 
 # see other available params in documentation 
 # https://github.com/Drakula2k/capistrano-rails-server
 
 
 # you can remove any recipe if you don't need it
-set :capistrano_rails_server, [:base, :nginx, :unicorn, :postgresql, :postfix, :rbenv, :check, :key]
+set :capistrano_rails_server, [:base, :nginx, :unicorn, :postgresql, :postfix, :rvm, :check, :key]
 require 'capistrano-rails-server'
 
 ```
@@ -45,7 +44,7 @@ Create user for deployment:
 
     # adduser yourappuser --ingroup admin
     
-(Optional) Edit `/etc/sudoers` file if you don't want to enter user's password several time during recipes running:
+(Optional) Edit `/etc/sudoers` file if you don't want to enter user's password several time during recipes running (don't forget to undo it after installing!):
 
 replace line 
 
@@ -77,7 +76,7 @@ Thats all, now you can deploy your app:
 
 `deploy:setup` - configure all software.
 
-`rbenv:install`
+`rvm_wrap:install`
 
 `nginx:install`
 
@@ -118,11 +117,9 @@ Thats all, now you can deploy your app:
 ### Available options and defaults for all recipes###
 You can overwrite any of these options in `deploy.rb` file.
 
-#### :rbenv ####
+#### :rvm ####
 
-`ruby_version` ("2.0.0-p247")
-
-`rbenv_bootstrap` ("bootstrap-ubuntu-12-04")
+`rvm_ruby_string` ("2.0.0-p353")
 
 #### :postgresql ####
 
