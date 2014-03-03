@@ -1,5 +1,19 @@
 @configuration.load do
   namespace :deploy do
+    desc "Increase SSH timeouts for running long operations like Ruby compiling"
+    task :ssh do
+      cmd = %Q{grep -R "ClientAliveInterval" /etc/ssh/sshd_config}
+      content = capture( %Q{bash -c '#{cmd}' || echo "false"}).strip
+      if content == 'false'
+        run %Q{#{sudo} bash -c "echo 'ClientAliveInterval 18' >> /etc/ssh/sshd_config"}
+        run %Q{#{sudo} bash -c "echo 'ClientAliveCountMax 100' >> /etc/ssh/sshd_config"}
+        run "#{sudo} service ssh restart"
+      else
+        run 'echo "sshd_config is already updated!"'
+      end
+    end
+    before "deploy:install", "deploy:ssh"
+
     desc "Install everything onto the server"
     task :install do
       run "#{sudo} apt-get -y update"
