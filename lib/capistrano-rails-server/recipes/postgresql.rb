@@ -37,7 +37,7 @@
     after "deploy:finalize_update", "postgresql:symlink"
 
     desc "Rebuild cluster with another encoding and locale. WARNING! This task will remove all databases."
-    task :rebuild, roles: :app do
+    task :rebuild, roles: :db, only: {primary: true} do
       answer = 
       Capistrano::CLI.ui.ask "This task will remove all existing DBs, run it only on fresh server installation!
 Do you want to run this task? Otherwise this task will be skipped. (y/n):"
