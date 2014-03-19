@@ -17,7 +17,7 @@
     desc "Install everything onto the server"
     task :install do
       run "#{sudo} apt-get -y update"
-      run "#{sudo} apt-get -y install python-software-properties software-properties-common"
+      run "#{sudo} apt-get -y install python-software-properties software-properties-common git"
     end
 
     # Overwrite with no sudo
