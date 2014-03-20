@@ -6,9 +6,9 @@ Gem::Specification.new do |s|
   s.name        = "capistrano-rails-server"
   s.version     = "2.0.1"
   s.date        = "2014-03-03"
-  s.summary     = "Capistrano recipes to setup RVM, Nginx, Unicorn, Postgresql and Postfix production environment."
+  s.summary     = "Capistrano recipes to setup RVM, Nginx, Passenger, Postgresql and Postfix production environment."
   s.description =
-  "That gem includes capistrano recipes to install and configure ROR production environment with RVM, Nginx, Unicorn, Postgresql and Postfix."
+    "That gem includes capistrano recipes to install and configure ROR production environment with RVM, Nginx, Passenger, Postgresql and Postfix."
   s.authors     = ["Drakula2k"]
   s.email       = "drakula2k@gmail.com"
   s.homepage    = "https://github.com/Drakula2k/capistrano-rails-server"

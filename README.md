@@ -1,6 +1,9 @@
 #capistrano-rails-server gem#
 
 Capistrano-rails-server is a collection of capistrano recipes for setting up production server for RoR. The current testing environment is Ubuntu 12.04 LTS.
+
+Components: RVM, Nginx, Passenger, Postgresql, Postfix
+
 ## Installation ##
 Add this line to your application's Gemfile:
 
@@ -30,7 +33,7 @@ Then include these lines to the end of your `deploy.rb`:
 
 
 # you can remove any recipe if you don't need it
-set :capistrano_rails_server, [:base, :nginx, :unicorn, :postgresql, :postfix, :rvm, :check, :key]
+set :capistrano_rails_server, [:base, :nginx, :passenger, :postgresql, :postfix, :rvm, :check, :key]
 require 'capistrano-rails-server'
 
 ```
@@ -88,13 +91,13 @@ Thats all, now you can deploy your app:
 
 `nginx:restart`
 
-`unicorn:setup`
+`passenger:setup`
 
-`unicorn:start`
+`nginx:start`
 
-`unicorn:stop`
+`nginx:stop`
 
-`unicorn:restart`
+`passenger:restart`
 
 `postgresql:install`
 
@@ -137,16 +140,8 @@ You can overwrite any of these options in `deploy.rb` file.
 
 `postgresql_locale` ("en_US") - useful only if postgresql_rebuild is true
 
-#### :unicorn ####
+#### :passenger ####
 
-`unicorn_user` (user)
+`passenger_user` (user)
 
-`unicorn_env` ("production") - production or development
-
-`unicorn_pid` ("#{current_path}/tmp/pids/unicorn.pid")
-
-`unicorn_config` ("#{shared_path}/config/unicorn.rb")
-
-`unicorn_log` ("#{shared_path}/log/unicorn.log")
-
-`unicorn_workers` (2)
+`passenger_env` ("production") - production or development
