@@ -13,12 +13,11 @@
     after "deploy:setup", "nginx:setup"
     after "nginx:setup", "nginx:start"
 
-    %w[start stop].each do |command|
+    %w[start stop restart].each do |command|
       desc "#{command} nginx"
       task command, roles: :web do
         run "#{sudo} service nginx #{command}"
       end
-      after "deploy:#{command}", "nginx:#{command}"
     end
   end
 end
