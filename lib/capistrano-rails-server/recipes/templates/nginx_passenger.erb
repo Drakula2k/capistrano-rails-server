@@ -17,6 +17,7 @@ http {
     passenger_ruby /home/<%= user %>/.rvm/bin/<%= application %>_ruby;
 
     passenger_show_version_in_header off;
+    rails_env <%= passenger_env %>;
     passenger_friendly_error_pages <%= passenger_env == "production" ? "off" : "on"  %>;
     passenger_pre_start http://localhost/;
 
