@@ -11,7 +11,7 @@
       run "#{sudo} update-rc.d -f nginx defaults"
     end
     after "deploy:setup", "nginx:setup"
-    after "nginx:setup", "nginx:start"
+    after "nginx:setup", "nginx:restart"
 
     %w[start stop restart].each do |command|
       desc "#{command} nginx"
