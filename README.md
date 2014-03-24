@@ -107,6 +107,10 @@ Thats all, now you can deploy your app:
 
 `postgresql:rebuild` - rebuild Postgresql cluster with given locale and encoding. WARNING! This task removes all existing databases.
 
+`postgresql:import`
+
+`postgresql:export`
+
 `key:generate`
 
 `key:show` - show generated deployment key.

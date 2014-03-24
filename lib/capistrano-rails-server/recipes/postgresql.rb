@@ -55,5 +55,21 @@ Do you want to run this task? Otherwise this task will be skipped. (y/n):"
       before "postgresql:create_database", "postgresql:rebuild"
     end
 
+    desc "Export and download database to tmp dir"
+    task :export, roles: :db, only: {primary: true} do
+      run "pg_dump #{postgresql_database} > /tmp/#{postgresql_database}.sql", :shell => "sh"
+      download "/tmp/#{postgresql_database}.sql", "tmp/#{postgresql_database}.sql"
+    end
+
+    desc "Upload and import database from tmp dir"
+    task :import, roles: :db, only: {primary: true} do
+      upload "tmp/#{postgresql_database}.sql", "/tmp/#{postgresql_database}.sql"
+      answer = Capistrano::CLI.ui.ask "Are you sure want to import DB on this server?"
+      if %w(Y y yes).include? answer
+        run "psql #{postgresql_database} < /tmp/#{postgresql_database}.sql"
+      else
+        Capistrano::CLI.ui.say "postgresql:import task skipped."
+      end
+    end
   end
 end
