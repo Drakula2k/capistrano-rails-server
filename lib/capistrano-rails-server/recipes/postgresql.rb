@@ -10,9 +10,10 @@
   namespace :postgresql do
     desc "Install the latest stable release of PostgreSQL."
     task :install, roles: :db, only: {primary: true} do
-      run "#{sudo} add-apt-repository -y ppa:pitti/postgresql"
+      run "#{sudo} add-apt-repository -y 'deb http://apt.postgresql.org/pub/repos/apt/ #{system_codename}-pgdg main'"
+      run "#{sudo} wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | #{sudo} apt-key add -"
       run "#{sudo} apt-get -y update"
-      run "#{sudo} apt-get -y install postgresql libpq-dev"
+      run "#{sudo} apt-get -y install postgresql-9.3 pgadmin3 libpq-dev"
     end
     after "deploy:install", "postgresql:install"
 
@@ -44,8 +45,8 @@ Do you want to run this task? Otherwise this task will be skipped. (y/n):"
       if %w(Y y yes).include? answer
         run "#{sudo} locale-gen #{postgresql_locale}.#{postgresql_encoding}"
         run "#{sudo} service postgresql stop"
-        run "#{sudo} pg_dropcluster --stop 9.1 main"
-        run "#{sudo} pg_createcluster --start --locale #{postgresql_locale}.#{postgresql_encoding} -e #{postgresql_encoding} 9.1 main"
+        run "#{sudo} pg_dropcluster --stop 9.3 main"
+        run "#{sudo} pg_createcluster --start --locale #{postgresql_locale}.#{postgresql_encoding} -e #{postgresql_encoding} 9.3 main"
       else
         Capistrano::CLI.ui.say "postgresql:rebuild task skipped."
       end
