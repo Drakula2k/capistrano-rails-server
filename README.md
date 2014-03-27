@@ -124,6 +124,10 @@ Thats all, now you can deploy your app:
 ### Available options and defaults for all recipes###
 You can overwrite any of these options in `deploy.rb` file.
 
+#### system ####
+
+`system_codename` ("precise") - system codename for repositories
+
 #### :rvm ####
 
 `rvm_ruby_string` ("2.0.0-p353")
