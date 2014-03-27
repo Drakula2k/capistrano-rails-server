@@ -25,6 +25,12 @@ Then include these lines to the end of your `deploy.rb`:
 #set :postgresql_locale, "ru_RU"
 #set :postgresql_rebuild, true
 
+# uncomment this if you want to overwrite default config templates
+#set :templates, {
+#  "nginx_passenger.erb" => File.expand_path("../templates/my_cool_nginx_template.erb", __FILE__),
+#  ...
+#}
+
 # uncomment this if you need another version of Ruby
 #set_default :rvm_ruby_string, "2.0.0-p353"
 # 
@@ -127,6 +133,8 @@ You can overwrite any of these options in `deploy.rb` file.
 #### system ####
 
 `system_codename` ("precise") - system codename for repositories
+
+`templates` - configs templates overrides
 
 #### :rvm ####
 
