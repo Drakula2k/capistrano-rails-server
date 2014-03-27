@@ -1,5 +1,11 @@
 def template(from, to)
-  erb = File.read(File.expand_path("../templates/#{from}", __FILE__))
+  if templates[from]
+    file = templates[from]
+  else
+    file = File.expand_path("../templates/#{from}", __FILE__)
+  end
+
+  erb = File.read(file)
   put ERB.new(erb).result(binding), to
 end
 

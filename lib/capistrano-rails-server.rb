@@ -7,6 +7,7 @@ require 'capistrano-rails-server/recipes/common'
 @configuration.load do
   set_default(:capistrano_rails_server, [:base, :nginx, :passenger, :postgresql, :postfix, :rvm, :check, :key])
   set_default(:system_codename, "precise")
+  set_default(:templates, {})
 
   capistrano_rails_server.each do |recipe|
     require "capistrano-rails-server/recipes/#{recipe}"
